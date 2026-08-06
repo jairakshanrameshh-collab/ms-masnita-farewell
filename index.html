@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farewell, Ms Masnita</title>
+  <meta name="description" content="A heartfelt farewell tribute to Ms Masnita, an extraordinary teacher.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+
+  <!-- Three.js ES Module Import Map -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-follower" id="cursorFollower" aria-hidden="true"></div>
+  <div id="sparkles" aria-hidden="true"></div>
+
+  <!-- Three.js WebGL Canvas (fixed behind all content) -->
+  <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+
+  <!-- Music Player -->
+  <div class="music-player" id="musicPlayer" role="region" aria-label="Music player">
+    <button class="music-btn" id="musicBtn" aria-label="Toggle music">
+      <svg class="music-icon music-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+        <line x1="23" y1="9" x2="17" y2="15"/>
+        <line x1="17" y1="9" x2="23" y2="15"/>
+      </svg>
+      <svg class="music-icon music-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      </svg>
+    </button>
+    <div class="volume-control" id="volumeControl">
+      <input type="range" min="0" max="100" value="50" id="volumeSlider" aria-label="Volume">
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-link active" data-section="hero">Home</a>
+      <a href="#thankyou" class="nav-link" data-section="thankyou">Thank You</a>
+      <a href="#gallery" class="nav-link" data-section="gallery">Gallery</a>
+      <a href="#videos" class="nav-link" data-section="videos">Messages</a>
+      <a href="#memories" class="nav-link" data-section="memories">Memories</a>
+      <a href="#appreciation" class="nav-link" data-section="appreciation">Appreciation</a>
+      <a href="#goodbye" class="nav-link" data-section="goodbye">Goodbye</a>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section id="hero" class="section hero-section">
+    <div class="hero-content">
+      <p class="hero-pre-title">A Tribute To</p>
+      <h1 class="hero-title">Farewell</h1>
+      <p class="hero-subtitle">Celebrating an extraordinary teacher who touched our lives</p>
+      <div class="scroll-indicator">
+        <span>Scroll to begin</span>
+        <div class="scroll-arrow">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== THANK YOU SECTION ==================== -->
+  <section id="thankyou" class="section thankyou-section">
+    <div class="container">
+      <h2 class="section-title reveal-text">Thank You, Ms Masnita</h2>
+      <div class="thankyou-content">
+        <p class="reveal-text">
+          Words can scarcely capture the depth of gratitude we hold for you. You have been more
+          than a teacher — you have been a guiding light, a source of inspiration, and a
+          steady hand during our most uncertain moments. Your classroom was not merely a room
+          filled with desks and books; it was a sanctuary where curiosity thrived, where every
+          question was welcomed, and where even the quietest voice found the courage to speak.
+        </p>
+        <p class="reveal-text">
+          You taught us not just the lessons printed in textbooks, but the lessons that shape
+          character — patience in the face of difficulty, kindness toward one another, and the
+          belief that every one of us carries something remarkable within. You saw potential in
+          us before we could see it in ourselves, and that is a gift we will carry forever.
+        </p>
+        <p class="reveal-text">
+          As you embark on your next chapter, know that your legacy lives on in every student whose
+          life you have touched. The seeds you have planted will continue to bloom for generations.
+          This farewell is not an ending — it is a celebration of everything you have given,
+          and everything you will continue to inspire.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PHOTO GALLERY SECTION ==================== -->
+  <section id="gallery" class="section gallery-section">
+    <div class="container">
+      <h2 class="section-title reveal-text">Cherished Moments</h2>
+      <p class="section-subtitle reveal-text">A collection of beautiful memories we shared together</p>
+      <div class="masonry-grid" id="galleryGrid">
+        <!-- Gallery items generated by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== VIDEO MESSAGES SECTION ==================== -->
+  <section id="videos" class="section videos-section">
+    <div class="container">
+      <h2 class="section-title reveal-text">Video Messages</h2>
+      <p class="section-subtitle reveal-text">Hear from the hearts of those who love you</p>
+      <div class="video-grid" id="videoGrid">
+        <!-- Video cards generated by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MEMORIES SECTION ==================== -->
+  <section id="memories" class="section memories-section">
+    <div class="container">
+      <h2 class="section-title reveal-text">Memories We Hold Dear</h2>
+      <p class="section-subtitle reveal-text">Moments that defined our journey together</p>
+      <div class="timeline" id="timeline">
+        <div class="timeline-item reveal-text">
+          <div class="timeline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="timeline-content glass-card">
+            <h3>The First Day</h3>
+            <p>We walked into your classroom, nervous and uncertain, and you greeted us with the warmest smile. In that single moment, we knew we were in the right place. You made each of us feel seen, valued, and welcomed.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal-text">
+          <div class="timeline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/><circle cx="12" cy="12" r="4"/></svg>
+          </div>
+          <div class="timeline-content glass-card">
+            <h3>Lessons Beyond Books</h3>
+            <p>You taught us that education extends far beyond the walls of a classroom. Through your stories, your patience, and your unwavering belief in us, you showed us what it means to be truly compassionate and resilient in life.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal-text">
+          <div class="timeline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="timeline-content glass-card">
+            <h3>When We Struggled</h3>
+            <p>During our hardest moments, you never turned away. You stayed after class, offered words of encouragement, and reminded us that failure was simply a stepping stone toward success. Your faith in us kept us going.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal-text">
+          <div class="timeline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="timeline-content glass-card">
+            <h3>Celebrations and Achievements</h3>
+            <p>Every victory, no matter how small, was celebrated with genuine joy. You taught us to take pride in our efforts and to recognize the achievements of others. Your enthusiasm was contagious and uplifting.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal-text">
+          <div class="timeline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="timeline-content glass-card">
+            <h3>The Bond We Share</h3>
+            <p>What made your class special was not just the curriculum but the community you built. We became a family under your guidance — supporting each other, learning together, and growing in ways we never imagined possible.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== APPRECIATION SECTION ==================== -->
+  <section id="appreciation" class="section appreciation-section">
+    <div class="container">
+      <h2 class="section-title reveal-text">What Makes Ms Masnita Special</h2>
+      <p class="section-subtitle reveal-text">The qualities that made you irreplaceable</p>
+      <div class="appreciation-grid" id="appreciationGrid">
+        <div class="appreciation-card glass-card reveal-text">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3>Kind</h3>
+          <p>Your kindness knew no bounds. Every student felt cared for and valued under your gentle guidance, creating a classroom where compassion was the foundation of everything.</p>
+        </div>
+        <div class="appreciation-card glass-card reveal-text">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>Patient</h3>
+          <p>You never rushed us. With endless patience, you explained concepts again and again until understanding dawned, never once making anyone feel inadequate for asking.</p>
+        </div>
+        <div class="appreciation-card glass-card reveal-text">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <h3>Inspiring</h3>
+          <p>Your passion for teaching was infectious. You ignited a love for learning in every student, showing us that education is not a duty but a beautiful lifelong journey of discovery.</p>
+        </div>
+        <div class="appreciation-card glass-card reveal-text">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Supportive</h3>
+          <p>You were our biggest cheerleader. Whether we succeeded or stumbled, you stood by our side, offering encouragement, guidance, and the unwavering belief that we could overcome any challenge.</p>
+        </div>
+        <div class="appreciation-card glass-card reveal-text">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Dedicated</h3>
+          <p>Your dedication went far beyond the call of duty. Late nights grading, early mornings preparing, and every moment in between was spent ensuring we received the best education possible.</p>
+        </div>
+        <div class="appreciation-card glass-card reveal-text">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <h3>Encouraging</h3>
+          <p>You had a remarkable ability to see the best in everyone. A simple word of encouragement from you could turn a bad day around and give us the strength to keep pushing forward.</p>
+        </div>
+        <div class="appreciation-card glass-card reveal-text">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3>Compassionate</h3>
+          <p>Your compassion extended beyond academics. You cared about our well-being, our struggles at home, and our dreams for the future. You taught us that true success is measured by the lives we touch.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FINAL GOODBYE SECTION ==================== -->
+  <section id="goodbye" class="section goodbye-section">
+    <div class="container goodbye-content">
+      <blockquote class="goodbye-quote reveal-text">
+        &ldquo;Every ending is the start of a beautiful new beginning.&rdquo;
+      </blockquote>
+      <div class="goodbye-message reveal-text">
+        <h2>Thank You</h2>
+        <h3>Ms Masnita</h3>
+        <div class="heart-symbol" aria-label="heart">&hearts;</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LIGHTBOX ==================== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-label="Image viewer" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close image viewer">&times;</button>
+    <img src="" alt="" id="lightboxImg">
+  </div>
+
+  <!-- ==================== SPECIAL MESSAGE OVERLAY (EASTER EGG) ==================== -->
+  <div class="special-overlay" id="specialOverlay" aria-hidden="true">
+    <div class="confetti-container" id="confettiContainer"></div>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    <div class="special-message">
+      <h2>Thank you for everything, Ms Masnita</h2>
+      <div class="special-heart">&hearts;</div>
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <p>Made with gratitude and appreciation for Ms Masnita.</p>
+  </footer>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="assets/music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
